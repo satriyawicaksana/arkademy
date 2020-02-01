@@ -30,9 +30,3 @@ const biodata = (name, age) => {
 }
 
 console.log(biodata("Satriya Wicaksana", 25));
-
-// tulis kegunaan JSON pada REST API
-/*
-JSON is a format for storing and transporting data.
-JSON is often used when data is sent from a server to a web page.
- */
