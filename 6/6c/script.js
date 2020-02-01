@@ -18,5 +18,6 @@ function removeItem() {
     document.getElementById('container_delete').style.display = "flex";
 }
 function editItem() {
+    event.preventDefault();
     document.getElementById('container_edit').style.display = "flex";
 }

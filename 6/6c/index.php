@@ -8,20 +8,6 @@ $db = "PDkWnhqmXL";
 
 <!DOCTYPE html>
 <html lang="en">
-<?php
-$servername = "localhost";
-$username = "username";
-$password = "password";
-
-// Create connection
-$conn = mysqli_connect($servername, $username, $password);
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-echo "Connected successfully";
-?>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,81 +30,40 @@ echo "Connected successfully";
   </header>
   <main>
     <div>
+    <?php   
+      $mysqli = new mysqli('localhost','root', '', 'arkademy') or die(mysqli_error($mysqli));
+      $result = $mysqli->query("SELECT product.id as id, cashier.name as cashier, product.name as product, category.name as category, price from category, cashier, product where category.id = product.id_category and cashier.id = product.id_cashier") or die($mysqli->error);
+      
+    ?>
       <table>
-        <tr>
-          <th>No.</th>
-          <th>Cashier</th>
-          <th>Product</th>
-          <th>Category</th>
-          <th>Price</th>
-          <th>Action</th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Pevita Pearce</td>
-          <td>Latte</td>
-          <td>Drink</td>
-          <td>Rp. 10.000</td>
-          <td>
-            <button onclick="editItem()">edit</button onclick="editItem()">
-            <button onclick="removeItem()">remove</button onclick="removeItem()">
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Raisa Andriana</td>
-          <td>Cake</td>
-          <td>Food</td>
-          <td>Rp. 15.000</td>
-          <td>
-            <button onclick="editItem()">edit</button onclick="editItem()">
-            <button onclick="removeItem()">remove</button onclick="removeItem()">
-          </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Raisa Andriana</td>
-          <td>Fried Rice</td>
-          <td>Food</td>
-          <td>Rp. 30.000</td>
-          <td>
-            <button onclick="editItem()">edit</button onclick="editItem()">
-            <button onclick="removeItem()">remove</button onclick="removeItem()">
-          </td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>Pevita Pearce</td>
-          <td>Gudeg</td>
-          <td>Food</td>
-          <td>Rp. 35.000</td>
-          <td>
-            <button onclick="editItem()">edit</button>
-            <button onclick="removeItem()">remove</button onclick="removeItem()">
-          </td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>Joko Purwadhi</td>
-          <td>Ice Tea</td>
-          <td>Drink</td>
-          <td>Rp. 55.000</td>
-          <td>
-            <button onclick="editItem()">edit</button>
-            <button onclick="removeItem()">remove</button onclick="removeItem()">
-          </td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>Satriya Wicaksana</td>
-          <td>Pecel Lele</td>
-          <td>Food</td>
-          <td>Rp. 15.000</td>
-          <td>
-            <button onclick="editItem()">edit</button>
-            <button onclick="removeItem()">remove</button>
-          </td>
-        </tr>
+      <thead>
+          <tr>
+            <th>No.</th>
+            <th>Cashier</th>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php 
+          while($row = $result->fetch_assoc()):?>
+          <tr>
+            <td><?php echo $row['id']; ?></td>
+            <td><?php echo $row['cashier']; ?></td>
+            <td><?php echo $row['product']; ?></td>
+            <td><?php echo $row['category']; ?></td>
+            <td>Rp. <?php echo $row['price']; ?></td>
+            <td>
+              <a onclick="editItem()" href="index.php?edit=<?php echo $row['id']; ?>">edit</a>
+              <a onclick="removeItem()" href="process.php?delete=<?php echo $row['id']; ?>">remove</a">
+            </td>
+          </tr>
+          
+          <?php
+          endwhile; ?>
+        </tbody>
       </table>
     </div>
   </main>
@@ -135,19 +80,20 @@ echo "Connected successfully";
         </div>
       </div>
       <div class="input_container">
-        <form action="" method="post">
-            <select name="name" id="name">
-              <option value="Raisa Andriana">Raisa Andriana</option>
-              <option value="Pevita Pearce">Pevita Pearce</option>
+        <form action="process.php" method="post">
+            <select name="cashier" id="cashier">
+              <option value="1">Pevita Pearce</option>
+              <option value="2">Raisa Andriana</option>
+              <option value="3">Satriya Wicaksana</option>
             </select>
-            <select name="type" id="type">
-              <option value="Food">Food</option>
-              <option value="Drink">Drink</option>
+            <select name="category" id="category">
+              <option value="1">Food</option>
+              <option value="2">Drink</option>
             </select>
-            <input type="text" placeholder="Ice Tea" />
-            <input type="text" placeholder="Rp. 10.000" />
+            <input type="text" placeholder="Ice Tea" name="name" />
+            <input type="text" placeholder="Rp. 10.000" name="price"/>
           <div class="data_button">
-            <button>ADD</button>
+            <button type="submit" name="save">ADD</button>
           </div>
         </form>
         </div>
@@ -194,8 +140,8 @@ echo "Connected successfully";
           <option value="Food">Food</option>
           <option value="Drink">Drink</option>
         </select>
-        <input type="text" placeholder="Ice Tea" />
-        <input type="text" placeholder="Rp. 10.000" />
+        <input type="text" placeholder="Ice Tea" value="<?php echo $name?>"/>
+        <input type="text" placeholder="Rp. 10.000" value="Rp. <?php echo $price?>"/>
       </div>
       <div class="data_button">
         <button>Edit</button>

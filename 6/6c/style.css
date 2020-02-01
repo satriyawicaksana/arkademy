@@ -109,11 +109,11 @@ table tr td:first-child{
     box-shadow: 0 0 5px 0 #d4d4d4;
     border-radius: 8px;
 }
-select, input{
+/* select, input{
     padding: 8px;
-    width: 60%;
+    width: 80%;
     margin: 16px 0;
-}
+} */
 .input_container{
     flex-direction: column;
 }
