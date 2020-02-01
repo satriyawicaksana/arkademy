@@ -1,0 +1,130 @@
+*, *::before, *::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+body{
+    box-sizing: border-box;
+}
+header{
+    display: flex;
+    height: 10vh;
+    box-shadow: 0 2px 5px 0 #d4d4d4;
+}
+.search{
+    width: 70%;
+    
+}
+.search > input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    background-color: #d4d4d4;
+    color: #fff;
+    outline: none;
+}
+.search > input::placeholder{
+    color: #fff;
+}
+.logo{
+    width: 15%;
+}
+.logo > img{
+    height: 80%;
+}
+.add{
+    width: 15%;
+}
+.add button{
+    padding: 8px 24px;
+    color: #fff;
+    background-color: #fadc9c;
+    border: none;
+    box-shadow: 0 0 5px 0 #d4d4d4;
+    border-radius: 8px;
+}
+.search, .add, .logo, main, .container, .add_header, .input_container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+main{
+    height: 90vh;
+}
+table{
+    box-shadow: 0 0 5px 0 #d4d4d4;
+    border-radius: 32px;
+    border-collapse: collapse;
+    overflow: hidden;
+    text-align: center;
+}
+table th{
+    background-color: #fadc9c;
+    padding: 32px;
+    color: #fff;
+}
+table td{
+    padding: 16px;
+}
+table tr td:first-child{
+    font-weight: bold;
+}
+
+.container{
+    background-color: rgba(0, 0, 0, 0.75);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    display: none;
+}
+.container > div{
+    background-color: #fff;
+    padding: 16px;
+    min-width: 50%;
+}
+.add_header{
+    justify-content: space-between;
+    font-weight: bold;
+}
+.close svg{
+    fill: red;
+}
+.close{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+.data_button{
+    display: flex;
+    justify-content: flex-end;
+}
+.data_button > button{
+    padding: 8px 24px;
+    color: #fff;
+    background-color: #fadc9c;
+    border: none;
+    box-shadow: 0 0 5px 0 #d4d4d4;
+    border-radius: 8px;
+}
+select, input{
+    padding: 8px;
+    width: 60%;
+    margin: 16px 0;
+}
+.input_container{
+    flex-direction: column;
+}
+div.delete_data{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    padding: 32px;
+}
+.success_icon svg{
+    fill: #35e670;
+}
