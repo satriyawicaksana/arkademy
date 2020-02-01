@@ -92,6 +92,17 @@ table tr td:first-child{
 .close svg{
     fill: red;
 }
+.btn{
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+}
+.edit-btn svg{
+    fill: #35e670;
+}
+
+.delete-btn svg{
+    fill: red;
+}
 .close{
     display: flex;
     justify-content: flex-end;
@@ -113,6 +124,8 @@ select, input{
     padding: 8px;
     width: 60%;
     margin: 16px 0;
+    border: none;
+    border-bottom: 1px solid #d4d4d4;
 }
 .input_container{
     flex-direction: column;
